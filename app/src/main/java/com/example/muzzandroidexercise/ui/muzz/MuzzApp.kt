@@ -163,7 +163,7 @@ fun MuzzApp(
                     contentPadding = PaddingValues(16.dp)
                 ) {
                     items(muzzChatUiState.messages) { message ->
-                        if (message.getDurationToLastMessage.second < 1) {
+                        if (message.getDurationToLastMessage.hour > 1) {
                             Spacer(modifier = Modifier.height(8.dp))
                             Row(
                                 horizontalArrangement = Arrangement.Center,
