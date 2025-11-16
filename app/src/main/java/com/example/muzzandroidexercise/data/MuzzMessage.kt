@@ -2,6 +2,8 @@ package com.example.muzzandroidexercise.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.muzzandroidexercise.utils.Time
+import com.example.muzzandroidexercise.utils.TimeUtils
 
 @Entity(tableName = "messages")
 data class MuzzMessage(
@@ -10,4 +12,17 @@ data class MuzzMessage(
     val content: String,
     val durationToLastMessage: Long,
     val timestamp: Long
-)
+) {
+
+    val getDurationToLastMessage: Time
+        get() = TimeUtils().formatDuration(durationToLastMessage)
+
+    val isFromMe: Boolean
+        get() = senderId == -1
+
+    val dayOfMessage: String
+        get() = TimeUtils().getDayOfWeek(timestamp)
+
+    val hourAndMinuteOfMessage: String
+        get() = "${TimeUtils().getHourOfDay(timestamp)}:${TimeUtils().getMinuteOfHour(timestamp)}"
+}
